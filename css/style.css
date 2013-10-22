@@ -1,0 +1,31 @@
+body a:hover {
+    text-decoration: none;
+}
+
+h1 {
+    font-size: 90px;
+}
+
+h2 {
+    font-family: 'Lato', sans-serif;
+    font-size: 26px;
+    line-height: 37px;
+    margin-top: 30px;    
+}
+
+img {
+    width: 201px;
+    height: 250px;
+    margin: 40px 0 0 80px;
+}
+
+.row {
+    margin-top: 10px;
+}
+
+/* Desktops have some vertical space at the top */
+@media (min-width: 992px) {
+    .row {
+        margin-top: 140px;
+    }
+}

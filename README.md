@@ -34,7 +34,7 @@ passwd
 Update:
 
 ```bash
-apt-get update && apt-get upgrade
+apt-get update && apt-get upgrade -y
 ```
 
 If Hosting provider doesn't already setup hostname:

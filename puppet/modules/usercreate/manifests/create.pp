@@ -18,6 +18,7 @@ define usercreate::create($comment, $groups = []) {
     exec { "${name}_bashrc":
         command => "/bin/sed -i -e's/#force_color_prompt/force_color_prompt/' /home/${name}/.bashrc",
         unless  => "/bin/cat /home/${name}/.bashrc | grep -e '^force_color_prompt=yes'",
+        require => User[$name],
     }
 
 }

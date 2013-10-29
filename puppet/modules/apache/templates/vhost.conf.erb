@@ -1,0 +1,17 @@
+<VirtualHost *:80>
+        ServerAdmin gravityapple@gmail.com
+        ServerName <%= @site_domain %>
+        ServerAlias www.<%= @site_domain %>
+
+        DirectoryIndex index.html
+        DocumentRoot <%= @public_dir %>/
+
+        ScriptAlias /cgi-bin/ <%= @base_dir %>/cgi-bin/
+        <Location /cgi-bin>
+                Options +ExecCGI
+        </Location>
+
+	LogLevel warn
+        ErrorLog <%= @base_dir %>/log/error.log
+        CustomLog <%= @base_dir %>/log/access.log combined
+</VirtualHost>

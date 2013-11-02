@@ -23,6 +23,8 @@ cd gravityapple
 vagrant up
 ```
 
+All done, check out 192.168.85.6!
+
 ### Setting up on a freshly created Debian 7 Host (untested on other distributions)
 
 Login and change root password:
@@ -35,25 +37,6 @@ Update:
 
 ```bash
 apt-get update && apt-get upgrade -y
-```
-
-If Hosting provider doesn't already setup hostname:
-
-```bash
-sudo hostname gravityapple
-sudo su -c 'echo gravityapple > /etc/hostname'
-#replace ip address with ip of machine
-sudo su -c 'echo 127.0.0.1 gravityapple.com >> /etc/hosts'
-```
-
-Install puppet:
-
-```bash
-wget http://apt.puppetlabs.com/puppetlabs-release-wheezy.deb
-dpkg -i puppetlabs-release-wheezy.deb
-apt-get update
-apt-get -y install puppet
-rm puppetlabs-release-wheezy.deb
 ```
 
 Install git:
@@ -69,16 +52,16 @@ mkdir /home/www && cd /home/www
 git clone https://github.com/aaronjbaptiste/gravityapple.git gravityapple
 ```
 
-Provision:
+Install:
 
 ```bash
-cd gravityapple/puppet
-puppet apply ./manifests/site.pp --modulepath ./modules
+cd gravityapple
+./boostrap.sh
 ```
 
-All done!
+All done! Easy huh?
 
 Todo
 ----
 
-1. Set hostname via puppet
+1. Look into puppet-librarian instead of listing puppet modules in bootstrap.sh

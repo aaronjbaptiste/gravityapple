@@ -1,5 +1,4 @@
 *.sublime-project
 *.sublime-workspace
 .vagrant/
-cgi-bin/
-log/
+puppet/forge-modules/

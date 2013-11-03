@@ -66,3 +66,4 @@ Todo
 ----
 
 1. Look into puppet-librarian instead of listing puppet modules in bootstrap.sh
+2. Fix cgid issue: https://github.com/puppetlabs/puppetlabs-apache/issues/429

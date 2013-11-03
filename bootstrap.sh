@@ -16,6 +16,7 @@ puppet module install puppetlabs/apache --modulepath puppet/forge-modules
 puppet module install puppetlabs/mysql --modulepath puppet/forge-modules
 puppet module install example42/php --modulepath puppet/forge-modules
 puppet module install saz/timezone --modulepath puppet/forge-modules
+puppet module install branan/minecraft --modulepath puppet/forge-modules
 
 echo "Applying manifests..."
 puppet apply puppet/manifests/site.pp --modulepath puppet/modules:puppet/forge-modules

@@ -38,6 +38,35 @@ class { 'timezone':
     timezone => 'Europe/London',
 }
 
+file { '/opt/minecraft/server.properties':
+    ensure  => file,
+    owner   => 'mcserver',
+    group   => 'mcserver',
+    mode    => '0664',
+    require => User['mcserver'],
+}
+
+class { 'minecraft': 
+    heap_size  => 512,
+    heap_start => 256,
+}
+
+S3file <| title == "${minecraft::homedir}/minecraft_server.jar" |> { 
+    source  => 'Minecraft.Download/versions/1.7.2/minecraft_server.1.7.2.jar'
+}
+
+Service <| title == 'minecraft' |> { 
+    enable  => true
+}
+
+minecraft::server_prop { 
+    'server-name':  value => 'GravityApple';
+    'server-port':  value => 40962;
+    'difficulty':   value => 2;
+    'max-players':  value => 8;
+    'motd':         value => 'All good in the hood!';
+}
+
 include iptables
 
 package { 'vim':

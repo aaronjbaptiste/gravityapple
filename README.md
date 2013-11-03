@@ -56,7 +56,8 @@ Install:
 
 ```bash
 cd gravityapple
-./boostrap.sh
+chmod u+x bootstrap.sh
+./bootstrap.sh
 ```
 
 All done! Easy huh?

@@ -3,6 +3,10 @@ gravityapple
 
 The personal website and playground for [Aaron John-Baptiste](http://gravityapple.com). 
 
+It contains fully automated provisioning of the website www.gravityapple.com and the sub-domain snappad.gravityapple.com.
+
+It also serves a minecraft (1.7) server!
+
 ### Setting up locally
 
 Host machine prerequisites:
@@ -66,4 +70,4 @@ Todo
 ----
 
 1. Look into puppet-librarian instead of listing puppet modules in bootstrap.sh
-2. Fix cgid issue: https://github.com/puppetlabs/puppetlabs-apache/issues/429
+2. Automate hosts file (on the host) updating

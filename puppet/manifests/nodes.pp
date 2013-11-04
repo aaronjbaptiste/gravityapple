@@ -11,6 +11,14 @@ node 'local-gravityapple' {
         ],
     }
 
+    apache::vhost { 'snappad.local-gravityapple.com': 
+        port           => '80',
+        docroot        => "/home/www/snap-pad/public/",
+        docroot_owner  => 'www-data',
+        docroot_group  => 'www-data',
+        serveradmin    => 'gravityapple@gmail.com',
+    }
+
     usercreate::create { 'vagrant':
         comment => 'Vagrant user',
         groups  => ['cdrom', 'sudo', 'audio', 'video'],
@@ -29,6 +37,14 @@ node 'gravityapple' {
         serveraliases  => [
             'www.gravityapple.com',
         ],
+    }
+
+    apache::vhost { 'snappad.gravityapple.com': 
+        port           => '80',
+        docroot        => "/home/www/snap-pad/public/",
+        docroot_owner  => 'www-data',
+        docroot_group  => 'www-data',
+        serveradmin    => 'gravityapple@gmail.com',
     }
 
     include ssh

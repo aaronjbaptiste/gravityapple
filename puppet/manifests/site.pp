@@ -32,6 +32,8 @@ package { 'vim':
     ensure => installed,
 }
 
+include git
+
 ###
 ### users
 ###
@@ -45,18 +47,20 @@ usercreate::create { 'aaron':
 ### lamp stack
 ###
 class { 'apache': 
-    default_mods  => false,
     default_vhost => false,
     sendfile      => 'off',
+    mpm_module    => 'prefork',
 }
 
-include apache::mod::dir 
-
+include apache::mod::rewrite
+include apache::mod::php 
 
 class { '::mysql::server': ;
         '::mysql::client': ;
         'php': ;
 }
+
+php::module { "mcrypt": }
 
 ###
 ### minecraft
@@ -72,14 +76,16 @@ file { '/opt/minecraft/server.properties':
 class { 'minecraft': 
     heap_size  => 512,
     heap_start => 256,
+    manage_curl => false,
 }
 
 S3file <| title == "${minecraft::homedir}/minecraft_server.jar" |> { 
-    source  => 'Minecraft.Download/versions/1.7.2/minecraft_server.1.7.2.jar'
+    source  => 'Minecraft.Download/versions/1.7.2/minecraft_server.1.7.2.jar',
+    require => Package['curl'],
 }
 
 Service <| title == 'minecraft' |> { 
-    enable  => true
+    enable  => true,
 }
 
 minecraft::server_prop { 
@@ -89,6 +95,44 @@ minecraft::server_prop {
     'max-players':  value => 8;
     'motd':         value => 'All good in the hood!';
 }
+
+###
+### snap-pad
+###
+git::repo{'snap-pad':
+    path   => '/home/www/snap-pad',
+    source => 'https://github.com/aaronjbaptiste/snap-pad.git',
+}
+
+include composer
+
+class { 'nodejs':
+    version => 'latest',
+}
+
+file { '/home/www/snap-pad/app/storage':
+    ensure  => directory,
+    owner   => 'www-data',
+    group   => 'www-data',
+    mode    => '0644',
+    recurse => true,
+    require => Git::Repo['snap-pad'],
+}
+
+composer::exec { 'snap-pad-install':
+    cmd => 'install',
+    cwd => '/home/www/snap-pad',
+}
+
+# package { ['requirejs', 'bower']:
+#     provider => 'npm',
+#     require  => Class['nodejs'],
+# }
+
+#bower install
+# exec {
+#     command => "/usr/bin/bower install" 
+# }
 
 ###
 ### node specific stuff

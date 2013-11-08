@@ -90,10 +90,9 @@ Service <| title == 'minecraft' |> {
 
 minecraft::server_prop { 
     'server-name':  value => 'GravityApple';
-    'server-port':  value => 40962;
     'difficulty':   value => 2;
     'max-players':  value => 8;
-    'motd':         value => 'All good in the hood!';
+    'motd':         value => 'Yo yo yo!';
 }
 
 ###
@@ -124,10 +123,10 @@ composer::exec { 'snap-pad-install':
     cwd => '/home/www/snap-pad',
 }
 
-# package { ['requirejs', 'bower']:
-#     provider => 'npm',
-#     require  => Class['nodejs'],
-# }
+package { ['requirejs', 'bower']:
+    provider => 'npm',
+    require  => Class['nodejs'],
+}
 
 #bower install
 # exec {

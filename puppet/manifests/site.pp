@@ -106,7 +106,7 @@ git::repo{'snap-pad':
 include composer
 
 class { 'nodejs':
-    version => 'latest',
+  version => 'stable',
 }
 
 file { '/home/www/snap-pad/app/storage':
@@ -125,13 +125,16 @@ composer::exec { 'snap-pad-install':
 
 package { ['requirejs', 'bower']:
     provider => 'npm',
-    require  => Class['nodejs'],
+    ensure   => present,
+    require => Class['nodejs'],
 }
 
 #bower install
-# exec {
-#     command => "/usr/bin/bower install" 
-# }
+exec { 'bower install':
+    cwd     => "/home/www/snap-pad",
+    command => "/usr/local/node/node-v0.10.22/bin/bower install --allow-root",
+    require => Package['bower'],
+}
 
 ###
 ### node specific stuff

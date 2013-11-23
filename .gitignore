@@ -2,3 +2,4 @@
 *.sublime-workspace
 .vagrant/
 puppet/forge-modules/
+/snap-pad

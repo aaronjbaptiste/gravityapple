@@ -11,12 +11,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   
   config.vm.hostname = "local-gravityapple"
 
-  config.vm.synced_folder ".", "/home/www/gravityapple", nfs: true
+  config.vm.synced_folder ".", "/home/www", nfs: true
   
   config.vm.network :forwarded_port, guest: 80, host: 1380
   config.vm.network :forwarded_port, guest: 22, host: 1322
   config.vm.network :forwarded_port, guest: 40962, host: 40962
-  config.vm.network :private_network, ip: "192.168.85.6"
+  config.vm.network :private_network, ip: "192.168.85.13"
   
   config.vm.provider :virtualbox do |vb|
      vb.customize ["modifyvm", :id, "--memory", "512"]

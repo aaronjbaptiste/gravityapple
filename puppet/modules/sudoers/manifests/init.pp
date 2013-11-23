@@ -1,6 +1,6 @@
 class sudoers {
 
-    file { '/etc/sudo':
+    file { '/etc/sudoers':
         source  => 'puppet:///modules/sudoers/sudoers',
         mode    => '0440',
         owner   => root,

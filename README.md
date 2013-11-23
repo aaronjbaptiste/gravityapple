@@ -27,7 +27,7 @@ cd gravityapple
 vagrant up
 ```
 
-All done, check out 192.168.85.6!
+All done, check out 192.168.85.13!
 
 ### Setting up on a freshly created Debian 7 Host (untested on other distributions)
 
@@ -52,14 +52,13 @@ apt-get install -y git
 Checkout code:
 
 ```bash
-mkdir /home/www && cd /home/www
-git clone https://github.com/aaronjbaptiste/gravityapple.git gravityapple
+cd /home
+git clone https://github.com/aaronjbaptiste/gravityapple.git www
 ```
 
 Install:
 
 ```bash
-cd gravityapple
 chmod u+x bootstrap.sh
 ./bootstrap.sh
 ```
@@ -71,3 +70,7 @@ Todo
 
 1. Look into puppet-librarian instead of listing puppet modules in bootstrap.sh
 2. Automate hosts file (on the host) updating
+3. Remove hack to run bower after https://github.com/willdurand/puppet-nodejs/pull/30
+4. Try out new minecraft puppet module
+5. Figure out why mc server crashes
+6. Test snap-pad

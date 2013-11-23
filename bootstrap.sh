@@ -11,7 +11,7 @@ if ! type "puppet" > /dev/null; then
 fi
 
 echo "Installing puppet modules from the forge..."
-cd /home/www/gravityapple
+cd /home/www/
 puppet module install puppetlabs/apache --modulepath puppet/forge-modules
 puppet module install puppetlabs/mysql --modulepath puppet/forge-modules
 puppet module install example42/php --modulepath puppet/forge-modules

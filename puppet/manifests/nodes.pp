@@ -6,6 +6,7 @@ node 'local-gravityapple' {
         docroot_owner  => 'www-data',
         docroot_group  => 'www-data',
         serveradmin    => 'gravityapple@gmail.com',
+        override       => 'All',
         serveraliases  => [
             'www.local-gravityapple.com',
         ],
@@ -17,6 +18,7 @@ node 'local-gravityapple' {
         docroot_owner  => 'www-data',
         docroot_group  => 'www-data',
         serveradmin    => 'gravityapple@gmail.com',
+        override       => 'All',
     }
 
     usercreate::create { 'vagrant':

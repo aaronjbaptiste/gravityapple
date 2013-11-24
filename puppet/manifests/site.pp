@@ -61,6 +61,7 @@ class { '::mysql::server': ;
 }
 
 php::module { "mcrypt": }
+php::module { "mysql": }
 
 ###
 ### minecraft

@@ -71,6 +71,5 @@ Todo
 1. Look into puppet-librarian instead of listing puppet modules in bootstrap.sh
 2. Automate hosts file (on the host) updating
 3. Remove hack to run bower after https://github.com/willdurand/puppet-nodejs/pull/30
-4. Try out new minecraft puppet module
+4. Switch minecraft module: http://stackoverflow.com/questions/20175059/process-for-switching-a-puppet-module-installed-from-the-forge
 5. Figure out why mc server crashes
-6. Test snap-pad

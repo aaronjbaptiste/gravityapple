@@ -16,7 +16,6 @@ puppet module install puppetlabs/apache --modulepath puppet/forge-modules
 puppet module install puppetlabs/mysql --modulepath puppet/forge-modules
 puppet module install example42/php --modulepath puppet/forge-modules
 puppet module install saz/timezone --modulepath puppet/forge-modules
-puppet module install branan/minecraft --modulepath puppet/forge-modules
 puppet module install jproyo/git --modulepath puppet/forge-modules
 puppet module install tPl0ch/composer --modulepath puppet/forge-modules --ignore-dependencies
 puppet module install willdurand/nodejs --modulepath puppet/forge-modules

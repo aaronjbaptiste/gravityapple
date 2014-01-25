@@ -41,5 +41,3 @@ $IPT -A INPUT -j SERVICES
 $IPT -A SERVICES -p tcp --dport 80 -j ACCEPT
 #ssh
 $IPT -A SERVICES -p tcp --dport 22 -j ACCEPT
-#minecraft
-$IPT -A SERVICES -p tcp --dport 25565 -j ACCEPT

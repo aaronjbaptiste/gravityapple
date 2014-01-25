@@ -5,8 +5,6 @@ The personal website and playground for [Aaron John-Baptiste](http://gravityappl
 
 It contains fully automated provisioning of the website www.gravityapple.com and the sub-domain snappad.gravityapple.com.
 
-It also serves a minecraft (1.7) server!
-
 ### Setting up locally
 
 Host machine prerequisites:
@@ -71,5 +69,3 @@ Todo
 1. Look into puppet-librarian instead of listing puppet modules in bootstrap.sh
 2. Automate hosts file (on the host) updating
 3. Remove hack to run bower after https://github.com/willdurand/puppet-nodejs/pull/30
-4. Switch minecraft module: http://stackoverflow.com/questions/20175059/process-for-switching-a-puppet-module-installed-from-the-forge
-5. Figure out why mc server crashes

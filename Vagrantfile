@@ -4,18 +4,20 @@
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
 
+ENV['VAGRANT_DEFAULT_PROVIDER'] = 'virtualbox'
+
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
-  config.vm.box = "debian-70rc1-x64-vbox4210-nocm.box"
-  config.vm.box_url = "http://puppet-vagrant-boxes.puppetlabs.com/debian-70rc1-x64-vbox4210-nocm.box"
+  config.vm.box = "debian-jessie"
+  config.vm.box_url = "http://static.gender-api.com/debian-8-jessie-rc2-x64-slim.box"
   
-  config.vm.hostname = "local-gravityapple"
+  config.vm.hostname = "gravityapple"
+  config.hostmanager.manage_host = true
+  config.hostmanager.enabled = true
+  config.hostmanager.aliases = %w(gravityapple.dev)
 
-  config.vm.synced_folder ".", "/home/www", nfs: true
+  config.vm.synced_folder ".", "/home/www", id: "vagrant-root", :owner => "www-data", :group => "www-data"
   
-  config.vm.network :forwarded_port, guest: 80, host: 1380
-  config.vm.network :forwarded_port, guest: 22, host: 1322
-  config.vm.network :forwarded_port, guest: 40962, host: 40962
   config.vm.network :private_network, ip: "192.168.85.13"
   
   config.vm.provider :virtualbox do |vb|

@@ -84,7 +84,6 @@ class { 'nodejs':
 
 file { '/home/www/snap-pad/app/storage':
     ensure  => directory,
-    owner   => 'www-data',
     group   => 'www-data',
     mode    => '0644',
     recurse => true,
@@ -102,11 +101,11 @@ package { ['requirejs', 'bower']:
     require  => Class['nodejs'],
 }
 
-exec { 'bower install':
-    cwd     => "/home/www/snap-pad",
-    command => "/usr/local/node/node-v0.10.22/bin/bower install --allow-root",
-    require => Package['bower'],
-}
+#exec { 'bower install':
+#    cwd     => "/home/www/snap-pad",
+#    command => "/usr/local/node/node-v0.10.25/bin/bower install --allow-root",
+#    require => Package['bower'],
+#}
 
 ###
 ### node specific stuff

@@ -12,15 +12,15 @@ fi
 
 echo "Installing puppet modules from the forge..."
 cd /home/www/
-puppet module install puppetlabs/apache --modulepath puppet/forge-modules
-puppet module install puppetlabs/mysql --modulepath puppet/forge-modules
-puppet module install example42/php --modulepath puppet/forge-modules
-puppet module install saz/timezone --modulepath puppet/forge-modules
-puppet module install jproyo/git --modulepath puppet/forge-modules
-puppet module install tPl0ch/composer --modulepath puppet/forge-modules --ignore-dependencies
-puppet module install willdurand/nodejs --modulepath puppet/forge-modules
+puppet module install puppetlabs/apache
+puppet module install puppetlabs/mysql
+puppet module install example42/php
+puppet module install saz/timezone
+puppet module install jproyo/git
+puppet module install tPl0ch/composer --ignore-dependencies
+puppet module install willdurand/nodejs
 
 echo "Applying manifests..."
-puppet apply puppet/manifests/site.pp --modulepath puppet/modules:puppet/forge-modules
+puppet apply puppet/manifests/site.pp --modulepath puppet/modules:/etc/puppet/modules
 
 echo "Complete!"

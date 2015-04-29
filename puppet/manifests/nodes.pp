@@ -3,7 +3,6 @@ node 'local-gravityapple' {
     apache::vhost { 'local-gravityapple.com': 
         port           => '80',
         docroot        => "/home/www/gravityapple/public/",
-        docroot_owner  => 'www-data',
         docroot_group  => 'www-data',
         serveradmin    => 'gravityapple@gmail.com',
         override       => 'All',
@@ -12,10 +11,9 @@ node 'local-gravityapple' {
         ],
     }
 
-    apache::vhost { 'snappad.local-gravityapple.com': 
+    apache::vhost { 'local-snappad.gravityapple.com': 
         port           => '80',
         docroot        => "/home/www/snap-pad/public/",
-        docroot_owner  => 'www-data',
         docroot_group  => 'www-data',
         serveradmin    => 'gravityapple@gmail.com',
         override       => 'All',
@@ -33,7 +31,6 @@ node 'gravityapple' {
     apache::vhost { 'gravityapple.com': 
         port           => '80',
         docroot        => "/home/www/gravityapple/public/",
-        docroot_owner  => 'www-data',
         docroot_group  => 'www-data',
         serveradmin    => 'gravityapple@gmail.com',
         serveraliases  => [
@@ -44,7 +41,6 @@ node 'gravityapple' {
     apache::vhost { 'snappad.gravityapple.com': 
         port           => '80',
         docroot        => "/home/www/snap-pad/public/",
-        docroot_owner  => 'www-data',
         docroot_group  => 'www-data',
         serveradmin    => 'gravityapple@gmail.com',
     }

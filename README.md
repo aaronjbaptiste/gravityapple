@@ -11,6 +11,12 @@ Host machine prerequisites:
 
 1. [Install VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 2. [Install Vagrant](http://downloads.vagrantup.com)
+3. Install useful Vagrant plugins
+
+```bash
+vagrant plugin install vagrant-vbguest
+vagrant plugin install vagrant-hostmanager
+```
 
 Checkout code:
 
@@ -25,7 +31,7 @@ cd gravityapple
 vagrant up
 ```
 
-All done, check out 192.168.85.13!
+All done, check out [http://gravityapple.dev]!
 
 ### Setting up on a freshly created Debian 7 Host (untested on other distributions)
 
@@ -66,6 +72,4 @@ All done! Easy huh?
 Todo
 ----
 
-1. Look into puppet-librarian instead of listing puppet modules in bootstrap.sh
-2. Automate hosts file (on the host) updating
-3. Remove hack to run bower after https://github.com/willdurand/puppet-nodejs/pull/30
+1. Remove puppet, do in bash

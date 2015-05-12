@@ -22,10 +22,11 @@ echo "-- Setting document root"
 sudo rm -rf /var/www/html
 sudo ln -fs /vagrant/public /var/www/html
 
+echo "-- Installing mysql and php libs"
 sudo apt-get install -y php5 mysql-server php5-mysql php5-mcrypt php5-curl php5-gd libapache2-mod-php5 libssh2-php
-
 sudo mysql_install_db
 
+echo "-- Error reporting on"
 sudo sed -i "s/error_reporting = .*/error_reporting = E_ALL/" /etc/php5/apache2/php.ini
 sudo sed -i "s/display_errors = .*/display_errors = On/" /etc/php5/apache2/php.ini
 

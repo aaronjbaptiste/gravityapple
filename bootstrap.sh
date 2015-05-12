@@ -23,7 +23,7 @@ sudo mkdir /vagrant/public
 sudo rm -rf /var/www/html
 sudo ln -fs /vagrant/public /var/www/html
 
-sudo apt-get install -y php5 mysql-server php5-mysql php5-mcrypt php5-curl php5-gd libapache2-mod-php5
+sudo apt-get install -y php5 mysql-server php5-mysql php5-mcrypt php5-curl php5-gd libapache2-mod-php5 libssh2-php
 
 sudo mysql_install_db
 

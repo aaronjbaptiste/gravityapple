@@ -19,7 +19,6 @@ sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password passwor
 sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password root'
 
 echo "-- Setting document root"
-sudo mkdir /vagrant/public
 sudo rm -rf /var/www/html
 sudo ln -fs /vagrant/public /var/www/html
 

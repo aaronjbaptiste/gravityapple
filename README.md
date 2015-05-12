@@ -11,7 +11,7 @@ Host machine prerequisites:
 
 1. [Install VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 2. [Install Vagrant](http://downloads.vagrantup.com)
-3. Install useful Vagrant plugins
+3. Install useful Vagrant plugins:
 
 ```bash
 vagrant plugin install vagrant-vbguest
@@ -33,13 +33,7 @@ vagrant up
 
 All done, check out [http://gravityapple.dev]!
 
-### Setting up on a freshly created Debian 7 Host (untested on other distributions)
-
-Login and change root password:
-
-```bash
-passwd
-```
+### Setting up on a freshly created Ubuntu 64bit 14.04 LTS Host (untested on other distributions)
 
 Update:
 
@@ -63,13 +57,21 @@ git clone https://github.com/aaronjbaptiste/gravityapple.git www
 Install:
 
 ```bash
+cd www
 chmod u+x bootstrap.sh
 ./bootstrap.sh
 ```
 
-All done! Easy huh?
+Production specific stuff:
+```bash
+passwd
+mysql_secure_installation
+```
 
-Todo
-----
+Login to mysql, then:
 
-1. Remove puppet, do in bash
+```sql
+CREATE DATABASE gravityapple_wp;
+```
+
+All done! Go to your domain and configure wordpress.

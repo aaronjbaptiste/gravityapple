@@ -1,26 +1,43 @@
-if ! type "puppet" > /dev/null; then
-    echo "Downloading puppet..."
-    cd /home
-    wget http://apt.puppetlabs.com/puppetlabs-release-wheezy.deb
+#!/usr/bin/env bash
 
-    echo "Installing puppet..."
-    dpkg -i puppetlabs-release-wheezy.deb
-    apt-get update
-    apt-get -y install puppet
-    rm puppetlabs-release-wheezy.deb
-fi
+echo "-- Starting the install process"
 
-echo "Installing puppet modules from the forge..."
-cd /home/www/
-puppet module install puppetlabs/apache
-puppet module install puppetlabs/mysql
-puppet module install example42/php
-puppet module install saz/timezone
-puppet module install jproyo/git
-puppet module install tPl0ch/composer --ignore-dependencies
-puppet module install willdurand/nodejs
+echo "-- Update Packages"
+sudo apt-get update
 
-echo "Applying manifests..."
-puppet apply puppet/manifests/site.pp --modulepath puppet/modules:/etc/puppet/modules
+echo "-- Installing basic tools, like vim"
+sudo apt-get install -y vim curl wget git
 
-echo "Complete!"
+echo "-- Mysql server default password"
+sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password password root'
+sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password root'
+
+echo "-- Installing apache"
+sudo apt-get install -y apache2
+sudo a2enmod rewrite
+sudo a2enmod deflate
+sudo sed -i 's/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
+
+echo "-- Setting document root"
+sudo mkdir /vagrant/public
+sudo rm -rf /var/www/html
+sudo ln -fs /vagrant/public /var/www/html
+
+sudo apt-get update
+
+sudo apt-get install -y php5 php5-mysql php5-mcrypt php5-curl php5-gd libapache2-mod-php5
+
+sudo sed -i "s/error_reporting = .*/error_reporting = E_ALL/" /etc/php5/apache2/php.ini
+sudo sed -i "s/display_errors = .*/display_errors = On/" /etc/php5/apache2/php.ini
+
+echo "-- Installing mysql"
+sudo apt-get install -y mysql-server
+
+echo "-- Restarting apache"
+sudo service apache2 restart
+
+echo "-- Installing composer"
+curl -s https://getcomposer.org/installer | php
+mv composer.phar /usr/local/bin/composer
+
+echo "-- Finished, ready to dev."

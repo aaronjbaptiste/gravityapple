@@ -1,7 +1,0 @@
-Port 22
-Protocol 2
-PermitRootLogin no
-PasswordAuthentication no
-AllowUsers aaron
-UsePAM yes
-X11Forwarding no

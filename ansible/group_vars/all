@@ -1,0 +1,12 @@
+deploy_user: deploy
+
+# created with mkpasswd --method=SHA-512
+deploy_password: $6$K/f3vkZ0rCT/gbwC$mnaaL6gu6w9G5XvBDx/jhxbyr.6sI3PlL.mBaLm6mit28aKI0i1Oe8rQ73rhvCiX9uy3668GyVnlRl6.yrw1d.
+
+logwatch_email: gravityapple@gmail.com
+
+timezone: Europe/London
+
+mysql_user: root
+
+web_root: /usr/share/nginx/html

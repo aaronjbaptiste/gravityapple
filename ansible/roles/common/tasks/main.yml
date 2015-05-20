@@ -1,0 +1,60 @@
+---
+  - name: Update Apt
+    apt: update_cache=yes cache_valid_time=3600
+
+  - name: Upgrade APT to the latest packages
+    apt: upgrade=safe
+
+  - name: Downloading common goodies
+    apt: name='{{ item }}' state=present
+    with_items:
+      - curl
+      - git-core
+      - logwatch
+      - fail2ban
+      - ufw
+      - unattended-upgrades
+      - vim
+      - ntp
+      - mcrypt
+
+  - name: Adjust APT update intervals
+    copy: src=apt_periodic dest=/etc/apt/apt.conf.d/10periodic
+
+  - name: Setup ufw
+    ufw: state=enabled policy=deny
+
+  - name: Allow ssh traffic
+    ufw: rule=allow port={{ sshd_port }} proto=tcp
+
+  - name: Allow http traffic
+    ufw: rule=allow port=80 proto=tcp
+
+  - name: Allow access to mysql
+    ufw: rule=allow port=3306 proto=tcp
+
+  - name: Set up Postfix to relay mail
+    debconf:  name=postfix
+              question='{{ item.question }}'
+              value='{{ item.value }}'
+              vtype='{{ item.vtype }}'
+    with_items:
+      - { question: 'postfix/mailname', value: '{{ ansible_fqdn }}', vtype: 'string' }
+      - { question: 'postfix/main_mailer_type', value: 'Internet Site', vtype: 'string' }
+
+  - name: Email log summary daily
+    lineinfile: dest=/etc/cron.daily/00logwatch
+                regexp="^/usr/sbin/logwatch"
+                line="/usr/sbin/logwatch --output mail --mailto {{ logwatch_email }} --detail high"
+                state=present create=yes
+
+  - name: Set timezone variables
+    copy: |
+      content='{{ timezone }}
+      '   
+      dest=/etc/timezone
+      owner=root
+      group=root
+      mode=0644
+    notify:
+      - update timezone

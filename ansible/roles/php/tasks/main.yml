@@ -1,0 +1,21 @@
+---
+  - name: Install php
+    apt: name='{{ item }}' state=present
+    with_items:
+      - php5-fpm
+      - php5-cli
+      - php5-curl
+      - php5-intl
+      - php5-json
+      - php5-mcrypt
+
+  - name: ensure php5-fpm cgi.fix_pathinfo=0
+    lineinfile: dest=/etc/php5/fpm/php.ini regexp='^(.*)cgi.fix_pathinfo=' line=cgi.fix_pathinfo=0
+    notify:
+      - restart php5-fpm
+      - restart nginx
+
+  - name: enable php5 mcrypt module
+    shell: php5enmod mcrypt
+    args:
+      creates: /etc/php5/cli/conf.d/20-mcrypt.ini

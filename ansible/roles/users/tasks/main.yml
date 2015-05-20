@@ -1,0 +1,10 @@
+---
+  - name: Setup deploy user
+    user: name="{{ deploy_user }}"
+          groups=sudo
+          shell=/bin/bash
+          password="{{ deploy_password }}"
+ 
+  - name: Adding public key to server
+    authorized_key: user="{{ deploy_user }}"
+                    key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"

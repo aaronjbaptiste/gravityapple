@@ -1,0 +1,39 @@
+---
+  - name: Install MariaDB server
+    apt: name=mariadb-server state=present
+    notify: 
+      - start mysql
+
+  - name: Install python MySql package #required for mysql_db tasks
+    apt: name=python-mysqldb state=present
+
+  - name: Set root password
+    mysql_user: name=root
+                host='{{ item }}'
+                password='{{ mysql_root_password }}'
+                check_implicit_admin=yes
+                login_user='{{ mysql_user }}'
+                login_password='{{ mysql_root_password }}'
+                state=present
+    with_items:
+      - '{{ inventory_hostname }}'
+      - 127.0.0.1
+      - ::1
+      - localhost
+
+  - name: Delete anonymous MySql server users
+    mysql_user: user=''
+                host='{{ item }}'
+                login_user='{{ mysql_user }}'
+                login_password='{{ mysql_root_password }}'
+                state=absent
+    with_items:
+      - localhost
+      - '{{ inventory_hostname }}'
+      - '{{ ansible_hostname }}'
+
+  - name: Remove test db
+    mysql_db: name=test
+              state=absent
+              login_user='{{ mysql_user }}'
+              login_password='{{ mysql_root_password }}'

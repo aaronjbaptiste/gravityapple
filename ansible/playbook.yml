@@ -1,0 +1,14 @@
+---
+- hosts: all
+  sudo: yes
+
+  vars:
+    ansible_ssh_port: '{{ sshd_port }}'
+
+  roles: 
+    - { role: common, tags: [common] }
+    - { role: users, tags: [users] }
+    - { role: sshd, tags: [sshd] }
+    - { role: nginx, tags: [nginx] }
+    - { role: mariadb, tags: [mariadb] }
+    - { role: php, tags: [php] }

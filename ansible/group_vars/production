@@ -1,0 +1,2 @@
+sshd_port: 4444
+mysql_root_password: devpw

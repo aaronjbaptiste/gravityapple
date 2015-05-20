@@ -29,7 +29,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     config.vm.provision :ansible do |ansible|
       ansible.playbook = "ansible/playbook.yml"
-      ansible.inventory_path = "ansible/inventories/webhosts"
+      ansible.inventory_path = "ansible/hosts"
       ansible.limit = 'dev'
     end
 

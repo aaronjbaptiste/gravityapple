@@ -34,6 +34,7 @@ mv ansible/group_vars/all/secrets.sample ansible/group_vars/all/secrets
 ```
 
 Edit files:
+
 1. ansible/hosts
 2. ansible/group_vars/all/config
 3. ansible/group_vars/all/secrets

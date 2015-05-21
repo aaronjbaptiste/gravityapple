@@ -1,6 +1,8 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+require_relative './key_authorization'
+
 VAGRANTFILE_API_VERSION = "2"
 
 ENV['VAGRANT_DEFAULT_PROVIDER'] = 'virtualbox'
@@ -11,6 +13,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.ssh.forward_agent = true
     config.vm.network :private_network, ip: "192.168.56.10"
     config.vm.hostname = "gravityapple.dev"
+
+    authorize_key_for_root config, '~/.ssh/id_dsa.pub', '~/.ssh/id_rsa.pub'
 
     if Vagrant.has_plugin? 'vagrant-hostsupdater'
       config.hostsupdater.aliases = ["www.gravityapple.dev"]
@@ -25,12 +29,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     else
       raise Vagrant::Errors::VagrantError.new,
         "vagrant-bindfs missing, please install the plugin:\nvagrant plugin install vagrant-bindfs"
-    end
-
-    config.vm.provision :ansible do |ansible|
-      ansible.playbook = "ansible/playbook.yml"
-      ansible.inventory_path = "ansible/hosts"
-      ansible.limit = 'dev'
     end
 
     config.vm.provider :virtualbox do |vb|

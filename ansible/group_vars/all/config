@@ -1,0 +1,9 @@
+deploy_user: deploy
+
+logwatch_email: email@domain.com
+
+timezone: Europe/London
+
+mysql_user: root
+
+web_root: /usr/share/nginx/html

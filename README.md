@@ -48,14 +48,14 @@ vagrant up
 Initial setup:
 
 ```
-ansible-playbook playbook.yml -l dev -uroot -e ansible_ssh_port=22 -i ansible/hosts
+ansible-playbook ansible/playbook.yml -l dev -uroot -e ansible_ssh_port=22 -i ansible/hosts
 ```
 
 All done, check out [http://gravityapple.dev]!
 
 To update:
 ```
-ansible-playbook playbook.yml -l dev --ask-sudo-pass -udeploy -i ansible/hosts
+ansible-playbook ansible/playbook.yml -l dev --ask-sudo-pass -udeploy -i ansible/hosts
 ```
 
 ### Then, to setup production (Ubuntu 14.04 x64 LTS)
@@ -67,11 +67,11 @@ root ssh access via ssh key on port 22
 Initial setup:
 
 ```
-ansible-playbook playbook.yml -l production -uroot -e ansible_ssh_port=22 -i ansible/hosts
+ansible-playbook ansible/playbook.yml -l production -uroot -e ansible_ssh_port=22 -i ansible/hosts
 ```
 
 To update:
 
 ```
-ansible-playbook playbook.yml -l production --ask-sudo-pass -udeploy -i ansible/hosts
+ansible-playbook ansible/playbook.yml -l production --ask-sudo-pass -udeploy -i ansible/hosts
 ```

@@ -30,7 +30,7 @@ cd gravityapple
 Configure:
 
 ```
-mv ansible/group_vars/all/secrets.sample ansible/group_vars/all/secrets
+cp ansible/group_vars/secrets.sample ansible/group_vars/all/secrets
 ```
 
 Edit files:
@@ -48,18 +48,17 @@ vagrant up
 Initial setup:
 
 ```
-cd ansible
-ansible-playbook playbook.yml -l dev -uroot -e ansible_ssh_port=22
+ansible-playbook playbook.yml -l dev -uroot -e ansible_ssh_port=22 -i ansible/hosts
 ```
 
 All done, check out [http://gravityapple.dev]!
 
 To update:
 ```
-ansible-playbook playbook.yml -l dev --ask-sudo-pass -udeploy
+ansible-playbook playbook.yml -l dev --ask-sudo-pass -udeploy -i ansible/hosts
 ```
 
-### Then, to setup production
+### Then, to setup production (Ubuntu 14.04 x64 LTS)
 
 Prereq:
 
@@ -68,11 +67,11 @@ root ssh access via ssh key on port 22
 Initial setup:
 
 ```
-ansible-playbook playbook.yml -l production -uroot -e ansible_ssh_port=22
+ansible-playbook playbook.yml -l production -uroot -e ansible_ssh_port=22 -i ansible/hosts
 ```
 
 To update:
 
 ```
-ansible-playbook playbook.yml -l production --ask-sudo-pass -udeploy
+ansible-playbook playbook.yml -l production --ask-sudo-pass -udeploy -i ansible/hosts
 ```

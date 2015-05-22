@@ -1,0 +1,12 @@
+---
+  - name: Setup ufw
+    ufw: state=enabled policy=deny
+
+  - name: Allow ssh traffic
+    ufw: rule=allow port={{ sshd_port }} proto=tcp
+
+  - name: Allow http traffic
+    ufw: rule=allow port=80 proto=tcp
+
+  - name: Allow access to mysql
+    ufw: rule=allow port=3306 proto=tcp

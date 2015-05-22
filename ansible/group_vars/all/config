@@ -1,9 +1,13 @@
-deploy_user: deploy
+#####  Contains stuff you don't mind being visible in source control
 
-logwatch_email: email@domain.com
+#####  Customise these
 
 timezone: Europe/London
+wordpress_site_title: "Site Name"
+admin_email: email@domain.com
 
-mysql_user: root
+#####  Generally leave these
 
-web_root: /usr/share/nginx/html
+wordpress_db_prefix: wp_
+wordpress_dir: "{{ web_root }}/wordpress"
+wordpress_home_url: "{{ inventory_hostname }}"

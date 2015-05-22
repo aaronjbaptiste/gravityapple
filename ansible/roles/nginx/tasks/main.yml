@@ -9,6 +9,3 @@
     notify:
       - restart php5-fpm
       - restart nginx
-
-  - name: Copy default index.php
-    copy: src=index.php dest=/usr/share/nginx/html/ mode=0644

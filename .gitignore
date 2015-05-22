@@ -2,3 +2,4 @@
 *.sublime-workspace
 .vagrant/
 ansible/group_vars/all/secrets
+vendor/

@@ -1,7 +1,14 @@
 ---
+  - name: Add PHP 5.6 apt repo
+    apt_repository:
+      repo: 'ppa:ondrej/php5-5.6'
+
   - name: Install php
     apt: name='{{ item }}' state=present
     with_items:
+      - php5-common
+      - php5-gd
+      - php5-mysqlnd
       - php5-fpm
       - php5-cli
       - php5-curl

@@ -1,3 +1,4 @@
+# thanks to https://gist.github.com/maxim/dafc3b6da5754419babb
 def authorize_key_for_root(config, *key_paths)
   [*key_paths, nil].each do |key_path|
     if key_path.nil?

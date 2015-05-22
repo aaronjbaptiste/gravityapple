@@ -21,15 +21,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     else
       raise Vagrant::Errors::VagrantError.new,
         "vagrant-hostsupdater missing, please install the plugin:\nvagrant plugin install vagrant-hostsupdater"
-    end
+    end 
 
-    if Vagrant.has_plugin? 'vagrant-bindfs'
-      config.vm.synced_folder './public', '/vagrant', type: 'nfs'
-      config.bindfs.bind_folder '/vagrant', '/var/www/gravityapple', u: 'vagrant', g: 'www-data'
-    else
-      raise Vagrant::Errors::VagrantError.new,
-        "vagrant-bindfs missing, please install the plugin:\nvagrant plugin install vagrant-bindfs"
-    end
+    # if Vagrant.has_plugin? 'vagrant-bindfs'
+    #   config.vm.synced_folder './public', '/vagrant', type: 'nfs'
+    #   config.bindfs.bind_folder '/vagrant', '/var/www/gravityapple', u: 'vagrant', g: 'www-data'
+    # else
+    #   raise Vagrant::Errors::VagrantError.new,
+    #     "vagrant-bindfs missing, please install the plugin:\nvagrant plugin install vagrant-bindfs"
+    # end
 
     config.vm.provider :virtualbox do |vb|
       vb.name = "gravityapple"

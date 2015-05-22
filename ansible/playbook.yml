@@ -12,3 +12,7 @@
     - { role: nginx, tags: [nginx] }
     - { role: mariadb, tags: [mariadb] }
     - { role: php, tags: [php] }
+    - { role: composer, tags: [composer] }
+    - { role: wp-cli, tags: [wp-cli] }
+    - { role: wordpress, tags: [wordpress] }
+    - { role: ufw, tags: [ufw] }

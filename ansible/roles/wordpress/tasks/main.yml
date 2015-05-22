@@ -1,0 +1,68 @@
+---
+  - name: Create wordpress database
+    mysql_db: name='{{ wordpress_db_name }}'
+              state=present
+              login_user='{{ mysql_user }}'
+              login_password='{{ mysql_root_password }}'
+
+  - name: Create wordpress db user and grant permissions
+    mysql_user: name='{{ wordpress_db_user }}'
+                password='{{ wordpress_db_user_pass }}'
+                priv='{{ wordpress_db_name }}.*:ALL'
+                state=present
+                login_user='{{ mysql_user }}'
+                login_password='{{ mysql_root_password }}'
+
+  - name: Is wordpress downloaded?
+    stat: path='{{ wordpress_dir }}/index.php'
+    register: wp_dir
+
+  - name: Create wordpress directory
+    file: path='{{ wordpress_dir }}'
+          owner='{{ deploy_user }}'
+          group='{{ deploy_user }}'
+          mode=0755
+          state=directory
+    when: wp_dir.stat.isdir is not defined
+
+  - name: Download WordPress
+    sudo: no
+    command: wp core download
+    args:
+      chdir: '{{ wordpress_dir }}/'
+    when: wp_dir.stat.isdir is not defined
+    remote_user: "{{ deploy_user }}"
+
+  - name: Configure WordPress
+    sudo: no
+    command: wp core config
+       --path="{{ wordpress_dir }}"
+       --dbname="{{ wordpress_db_name }}"
+       --dbuser="{{ wordpress_db_user }}"
+       --dbpass="{{ wordpress_db_user_pass }}"
+       --dbprefix="{{ wordpress_db_prefix }}"
+    when: wp_dir.stat.isdir is not defined
+    remote_user: "{{ deploy_user }}"
+
+  - name: Is WordPress installed?
+    sudo: no
+    command: wp core is-installed
+    args:
+      chdir: "{{ wordpress_dir }}/"
+    register: wordpress_is_installed
+    ignore_errors: True
+    remote_user: "{{ deploy_user }}"
+    changed_when: False
+
+  - name: Install WordPress tables
+    sudo: no
+    command: wp core install
+      --url="{{ wordpress_home_url }}"
+      --title="{{ wordpress_site_title }}"
+      --admin_user="{{ wordpress_admin_user }}"
+      --admin_password="{{ wordpress_admin_user_pass }}"
+      --admin_email="{{ admin_email }}"
+    args:
+      chdir: "{{ wordpress_dir }}/"
+    when: wordpress_is_installed|failed
+    remote_user: "{{ deploy_user }}"

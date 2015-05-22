@@ -21,18 +21,6 @@
   - name: Adjust APT update intervals
     copy: src=apt_periodic dest=/etc/apt/apt.conf.d/10periodic
 
-  - name: Setup ufw
-    ufw: state=enabled policy=deny
-
-  - name: Allow ssh traffic
-    ufw: rule=allow port={{ sshd_port }} proto=tcp
-
-  - name: Allow http traffic
-    ufw: rule=allow port=80 proto=tcp
-
-  - name: Allow access to mysql
-    ufw: rule=allow port=3306 proto=tcp
-
   - name: Set up Postfix to relay mail
     debconf:  name=postfix
               question='{{ item.question }}'
@@ -45,7 +33,7 @@
   - name: Email log summary daily
     lineinfile: dest=/etc/cron.daily/00logwatch
                 regexp="^/usr/sbin/logwatch"
-                line="/usr/sbin/logwatch --output mail --mailto {{ logwatch_email }} --detail high"
+                line="/usr/sbin/logwatch --output mail --mailto {{ admin_email }} --detail high"
                 state=present create=yes
 
   - name: Set timezone variables

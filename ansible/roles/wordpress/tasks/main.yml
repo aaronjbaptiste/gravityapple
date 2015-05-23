@@ -50,9 +50,9 @@
     args:
       chdir: "{{ wordpress_dir }}/"
     register: wordpress_is_installed
-    ignore_errors: True
+    ignore_errors: true
     remote_user: "{{ deploy_user }}"
-    changed_when: False
+    changed_when: false
 
   - name: Install WordPress tables
     sudo: no

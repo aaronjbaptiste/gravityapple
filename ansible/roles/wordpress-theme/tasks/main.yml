@@ -6,3 +6,21 @@
       update=no
     sudo: yes
     sudo_user: www-data
+
+  - name: Is theme active?
+    sudo: no
+    shell: wp theme status {{ wordpress_theme_name }} | grep Active
+    register: theme_active
+    args:
+      chdir: "{{ wordpress_dir }}/"
+    remote_user: "{{ deploy_user }}"
+    ignore_errors: True
+    changed_when: false
+
+  - name: Activate theme
+    sudo: no
+    command: wp theme activate {{ wordpress_theme_name }}
+    args:
+      chdir: "{{ wordpress_dir }}/"
+    remote_user: "{{ deploy_user }}"
+    when: theme_active|failed

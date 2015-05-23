@@ -66,3 +66,64 @@
       chdir: "{{ wordpress_dir }}/"
     when: wordpress_is_installed|failed
     remote_user: "{{ deploy_user }}"
+
+  - name: Lock down wp-admin
+    file: path='{{ wordpress_dir }}/wp-admin'
+          owner='{{ deploy_user }}'
+          group='{{ deploy_user }}'
+          mode=0755
+          state=directory
+
+  - name: Lock down wp-includes
+    file: path='{{ wordpress_dir }}/wp-includes'
+          owner='{{ deploy_user }}'
+          group='{{ deploy_user }}'
+          mode=0755
+          state=directory
+
+  - name: Open up wp-content
+    file: path='{{ wordpress_dir }}/wp-content'
+          owner='{{ deploy_user }}'
+          group='www-data'
+          state=directory
+          recurse=yes
+
+  - name: Delete Hello World post
+    sudo: no
+    command: wp post delete 1 --force
+    args:
+      chdir: "{{ wordpress_dir }}/"
+    when: wordpress_is_installed|failed
+    remote_user: "{{ deploy_user }}"
+
+  - name: Delete Sample Page
+    sudo: no
+    command: wp post delete 2 --force
+    args:
+      chdir: "{{ wordpress_dir }}/"
+    when: wordpress_is_installed|failed
+    remote_user: "{{ deploy_user }}"
+
+  - name: Delete Hello Dolly plugin
+    sudo: no
+    command: wp plugin delete hello
+    args:
+      chdir: "{{ wordpress_dir }}/"
+    when: wordpress_is_installed|failed
+    remote_user: "{{ deploy_user }}"
+
+  - name: Change rewrite structure
+    sudo: no
+    command: wp rewrite structure "/%postname%/"
+    args:
+      chdir: "{{ wordpress_dir }}/"
+    when: wordpress_is_installed|failed
+    remote_user: "{{ deploy_user }}"
+
+  - name: Flush rewrite rules
+    sudo: no
+    command: wp rewrite flush
+    args:
+      chdir: "{{ wordpress_dir }}/"
+    when: wordpress_is_installed|failed
+    remote_user: "{{ deploy_user }}"

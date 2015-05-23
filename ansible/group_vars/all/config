@@ -6,6 +6,9 @@ timezone: Europe/London
 wordpress_site_title: "Site Name"
 admin_email: email@domain.com
 
+wordpress_theme_repo: https://github.com/aaronjbaptiste/gravityapple-wordpress-theme.git
+wordpress_theme_name: "gravityapple"
+
 #####  Generally leave these
 
 wordpress_db_prefix: wp_

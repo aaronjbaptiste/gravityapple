@@ -1,0 +1,8 @@
+---
+  - name: Clone git repo
+    git: >
+      dest='{{ wordpress_dir }}/wp-content/themes/{{ wordpress_theme_name }}'
+      repo='{{ wordpress_theme_repo }}'
+      update=no
+    sudo: yes
+    sudo_user: www-data

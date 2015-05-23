@@ -15,4 +15,5 @@
     - { role: composer, tags: [composer] }
     - { role: wp-cli, tags: [wp-cli] }
     - { role: wordpress, tags: [wordpress] }
+    - { role: wordpress-theme, tags: [theme] }
     - { role: ufw, tags: [ufw] }

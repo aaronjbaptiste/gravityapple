@@ -23,13 +23,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         "vagrant-hostsupdater missing, please install the plugin:\nvagrant plugin install vagrant-hostsupdater"
     end 
 
-    # if Vagrant.has_plugin? 'vagrant-bindfs'
-    #   config.vm.synced_folder './public', '/vagrant', type: 'nfs'
-    #   config.bindfs.bind_folder '/vagrant', '/var/www/gravityapple', u: 'vagrant', g: 'www-data'
-    # else
-    #   raise Vagrant::Errors::VagrantError.new,
-    #     "vagrant-bindfs missing, please install the plugin:\nvagrant plugin install vagrant-bindfs"
-    # end
+    if Vagrant.has_plugin? 'vagrant-bindfs'
+      config.vm.synced_folder './www', '/vagrant', type: 'nfs'
+      config.bindfs.bind_folder '/vagrant', '/usr/share/nginx/html', u: 'vagrant', g: 'www-data', perms: 'u=rwX:g=rwX:o=rD'
+    else
+      raise Vagrant::Errors::VagrantError.new,
+        "vagrant-bindfs missing, please install the plugin:\nvagrant plugin install vagrant-bindfs"
+    end
 
     config.vm.provider :virtualbox do |vb|
       vb.name = "gravityapple"

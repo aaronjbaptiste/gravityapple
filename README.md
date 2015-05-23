@@ -55,7 +55,7 @@ All done, check out [http://gravityapple.dev]!
 
 To update:
 ```
-ansible-playbook ansible/playbook.yml -l dev --ask-sudo-pass -udeploy -i ansible/hosts
+ansible-playbook ansible/playbook.yml -l dev --ask-sudo-pass -uvagrant -i ansible/hosts
 ```
 
 ### Then, to setup production (Ubuntu 14.04 x64 LTS)

@@ -24,3 +24,43 @@
       chdir: "{{ wordpress_dir }}/"
     remote_user: "{{ deploy_user }}"
     when: theme_active|failed
+
+  - name: Install theme's composer dependencies
+    composer: command=install working_dir='{{ wordpress_dir }}/wp-content/themes/{{ wordpress_theme_name }}'
+
+  - name: Is wp-sync-db active?
+    sudo: no
+    shell: wp plugin status wp-sync-db | grep Active
+    register: sync_active
+    args:
+      chdir: "{{ wordpress_dir }}/"
+    remote_user: "{{ deploy_user }}"
+    ignore_errors: True
+    changed_when: false
+
+  - name: Activate wp-sync-db plugin
+    sudo: no
+    command: wp plugin activate wp-sync-db
+    args:
+      chdir: "{{ wordpress_dir }}/"
+    remote_user: "{{ deploy_user }}"
+    when: sync_active|failed
+
+  - name: Is wp-sync-db-media-files active?
+    sudo: no
+    shell: wp plugin status wp-sync-db-media-files | grep Active
+    register: sync_media_active
+    args:
+      chdir: "{{ wordpress_dir }}/"
+    remote_user: "{{ deploy_user }}"
+    ignore_errors: True
+    changed_when: false
+
+  - name: Activate wp-sync-db-media-files plugin
+    sudo: no
+    command: wp plugin activate wp-sync-db-media-files
+    args:
+      chdir: "{{ wordpress_dir }}/"
+    remote_user: "{{ deploy_user }}"
+    when: sync_media_active|failed
+

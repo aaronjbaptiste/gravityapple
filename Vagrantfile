@@ -25,7 +25,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     if Vagrant.has_plugin? 'vagrant-bindfs'
       config.vm.synced_folder './www', '/vagrant', type: 'nfs'
-      config.bindfs.bind_folder '/vagrant', '/usr/share/nginx/html', u: 'vagrant', g: 'www-data', perms: 'u=rwX:g=rwX:o=rD'
+      config.bindfs.bind_folder '/vagrant', '/usr/share/nginx/html', 
+        u: 'vagrant', 
+        g: 'www-data', 
+        perms: 'u=rwX:g=rwX:o=rD', 
+        :"chown-ignore" => true,
+        :"chgrp-ignore" => true,
+        :"chmod-ignore" => true
     else
       raise Vagrant::Errors::VagrantError.new,
         "vagrant-bindfs missing, please install the plugin:\nvagrant plugin install vagrant-bindfs"

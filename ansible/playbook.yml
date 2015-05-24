@@ -16,4 +16,7 @@
     - { role: wp-cli, tags: [wp-cli] }
     - { role: wordpress, tags: [wordpress] }
     - { role: wordpress-theme, tags: [theme] }
+    - { role: nodejs, tags: [nodejs] }
+    - { role: bower, tags: [bower] }
+    - { role: gulp, tags: [gulp] }
     - { role: ufw, tags: [ufw] }

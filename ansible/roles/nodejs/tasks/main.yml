@@ -1,0 +1,6 @@
+---
+  - name: Install nodejs
+    apt: name='{{ item }}' state=present
+    with_items:
+      - nodejs-legacy
+      - npm

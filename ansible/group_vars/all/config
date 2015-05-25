@@ -14,3 +14,5 @@ wordpress_theme_name: "gravityapple"
 wordpress_db_prefix: wp_
 wordpress_dir: "{{ web_root }}/wordpress"
 wordpress_home_url: "{{ inventory_hostname }}"
+
+env: "production"

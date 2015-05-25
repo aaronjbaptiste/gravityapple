@@ -1,0 +1,3 @@
+---
+  - name: npm install package.json
+    npm: path='{{ wordpress_dir }}/wp-content/themes/{{ wordpress_theme_name }}'

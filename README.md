@@ -45,18 +45,7 @@ Boot:
 vagrant up
 ```
 
-Initial setup:
-
-```
-ansible-playbook ansible/playbook.yml -l dev -uroot -e ansible_ssh_port=22 -i ansible/hosts
-```
-
 All done, check out [http://gravityapple.dev]!
-
-To update:
-```
-ansible-playbook ansible/playbook.yml -l dev --ask-sudo-pass -uvagrant -i ansible/hosts
-```
 
 ### Then, to setup production (Ubuntu 14.04 x64 LTS)
 

@@ -7,6 +7,10 @@ server {
 
     server_name {{ inventory_hostname }};
 
+    {% if env == 'development' -%}
+    sendfile off;
+    {% endif %}
+
     location / {
         try_files $uri $uri/ /index.php?$args;
     }

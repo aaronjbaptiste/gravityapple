@@ -19,4 +19,5 @@
     - { role: nodejs, tags: [nodejs] }
     - { role: bower, tags: [bower] }
     - { role: gulp, tags: [gulp] }
+    - { role: npm-install, tags: [npm-install] }
     - { role: ufw, tags: [ufw] }

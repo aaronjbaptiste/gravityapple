@@ -23,24 +23,21 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         "vagrant-hostsupdater missing, please install the plugin:\nvagrant plugin install vagrant-hostsupdater"
     end 
 
-    if Vagrant.has_plugin? 'vagrant-bindfs'
-      config.vm.synced_folder './www', '/vagrant', type: 'nfs'
-      config.bindfs.bind_folder '/vagrant', '/usr/share/nginx/html', 
-        u: 'vagrant', 
-        g: 'www-data', 
-        perms: 'u=rwX:g=rwX:o=rD', 
-        :"chown-ignore" => true,
-        :"chgrp-ignore" => true,
-        :"chmod-ignore" => true
-    else
-      raise Vagrant::Errors::VagrantError.new,
-        "vagrant-bindfs missing, please install the plugin:\nvagrant plugin install vagrant-bindfs"
-    end
+    config.vm.synced_folder "./www", "/usr/share/nginx/html", 
+      group: 'www-data', 
+      owner: 'www-data', 
+      mount_options: ["dmode=777", "fmode=766"]
 
     config.vm.provider :virtualbox do |vb|
       vb.name = "gravityapple"
       vb.customize ["modifyvm", :id, "--memory", 1024]
       vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+    end
+
+    config.vm.provision "ansible" do |ansible|
+      ansible.playbook = "ansible/playbook.yml"
+      ansible.inventory_path = "ansible/hosts"
+      ansible.limit = "dev"
     end
 
 end

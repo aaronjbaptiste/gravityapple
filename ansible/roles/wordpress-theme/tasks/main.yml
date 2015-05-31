@@ -28,6 +28,24 @@
   - name: Install theme's composer dependencies
     composer: command=install working_dir='{{ wordpress_dir }}/wp-content/themes/{{ wordpress_theme_name }}'
 
+  - name: Is jetpack active?
+    sudo: no
+    shell: wp plugin status jetpack | grep Active
+    register: jetpack_active
+    args:
+      chdir: "{{ wordpress_dir }}/"
+    remote_user: "{{ deploy_user }}"
+    ignore_errors: True
+    changed_when: false
+
+  - name: Activate jetpack plugin
+    sudo: no
+    command: wp plugin activate jetpack
+    args:
+      chdir: "{{ wordpress_dir }}/"
+    remote_user: "{{ deploy_user }}"
+    when: jetpack_active|failed
+
   - name: Is wp-sync-db active?
     sudo: no
     shell: wp plugin status wp-sync-db | grep Active

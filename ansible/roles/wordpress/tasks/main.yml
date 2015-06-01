@@ -41,6 +41,7 @@
        --dbuser="{{ wordpress_db_user }}"
        --dbpass="{{ wordpress_db_user_pass }}"
        --dbprefix="{{ wordpress_db_prefix }}"
+       --extra-php="define('JETPACK_DEV_DEBUG', true);"
     when: wp_dir.stat.isdir is not defined
     remote_user: "{{ deploy_user }}"
 

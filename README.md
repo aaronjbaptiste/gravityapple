@@ -46,6 +46,13 @@ vagrant up
 
 All done, check out [http://gravityapple.dev]!
 
+To get gulp watching for changes (run locally / on the host):
+```
+cd www/wordpress/wp-content/themes/gravityapple/
+npm install gulp-sass
+gulp
+```
+
 ### Then, to setup production (Ubuntu 14.04 x64 LTS)
 
 Prereq:

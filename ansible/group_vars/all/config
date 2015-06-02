@@ -3,8 +3,8 @@
 #####  Customise these
 
 timezone: Europe/London
-wordpress_site_title: "Site Name"
-admin_email: email@domain.com
+wordpress_site_title: "Gravity Apple"
+admin_email: gravityapple@gmail.com
 
 wordpress_theme_repo: https://github.com/aaronjbaptiste/gravityapple-wordpress-theme.git
 wordpress_theme_name: "gravityapple"

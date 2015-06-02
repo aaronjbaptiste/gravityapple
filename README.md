@@ -17,7 +17,6 @@ Host machine prerequisites:
 ```bash
 vagrant plugin install vagrant-vbguest
 vagrant plugin install vagrant-hostsupdater
-vagrant plugin install vagrant-bindfs
 ```
 
 Checkout code:

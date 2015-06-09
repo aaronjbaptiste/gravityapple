@@ -46,6 +46,32 @@
     remote_user: "{{ deploy_user }}"
     when: jetpack_active|failed
 
+  - name: Is PageBuilder installed?
+    sudo: no
+    shell: wp plugin status siteorigin-panels | grep Active
+    register: pagebuilder_active
+    args:
+      chdir: "{{ wordpress_dir }}/"
+    remote_user: "{{ deploy_user }}"
+    ignore_errors: True
+    changed_when: false
+
+  - name: Install pagebuilder
+    sudo: no
+    shell: wp plugin install siteorigin-panels
+    args:
+      chdir: "{{ wordpress_dir }}/"
+    remote_user: "{{ deploy_user }}"
+    when: pagebuilder_active|failed
+
+  - name: Activate PageBuilder plugin
+    sudo: no
+    command: wp plugin activate siteorigin-panels
+    args:
+      chdir: "{{ wordpress_dir }}/"
+    remote_user: "{{ deploy_user }}"
+    when: pagebuilder_active|failed
+
   - name: Is wp-sync-db active?
     sudo: no
     shell: wp plugin status wp-sync-db | grep Active
